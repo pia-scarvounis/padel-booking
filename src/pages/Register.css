@@ -1,0 +1,50 @@
+.register-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* regbox over alt annet */
+}
+
+.register-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+    z-index: 1001;
+}
+
+.register-box input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.register-box h2 {
+    font-size: 1.5rem; 
+    margin-bottom: 10px; 
+    color: black; 
+}
+
+.register-box button {
+    width: 100%;
+    padding: 10px;
+    background-color: #070f17;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.register-box button:hover {
+    background-color: #431f03;
+}

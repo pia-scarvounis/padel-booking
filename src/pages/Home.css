@@ -53,9 +53,12 @@ p {
 }
 
 button {
+    display: block;
+    width: 200px;
     padding: 10px 20px;
+    margin: 7px;
     font-size: 1rem;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.482);
     color: white;
     border: none;
     cursor: pointer;
