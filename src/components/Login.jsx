@@ -14,6 +14,15 @@ function Login({ onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // admin login
+    if (email === "admin" && password === "admin") {
+        setMessage("Administrator innlogging vellykket!");
+        setTimeout(() => {
+            navigate("/admin");
+        }, 2000);
+        return;
+    }
+
     try {
       // Hent alle brukere fra API
       const response = await fetch(API_URL, {
@@ -34,8 +43,11 @@ function Login({ onClose }) {
         if (user) {
           setMessage("Ready to padel! Du er nå logget inn!");
           setTimeout(() => { navigate("/booking");}, 2000); 
+          if (user.email === "admin" && user.password === "admin") {
+            navigate("/admin");
+          }
         } else {
-          setMessage("Feil e-mail eller passord");
+            navigate("/booking");
         }
       } else {
         setMessage("Feil epost eller passord");
@@ -51,8 +63,8 @@ function Login({ onClose }) {
         <h2>Logg inn</h2>
         <form onSubmit={handleSubmit}> 
           <input
-            type="email"
-            placeholder="E-post"
+            type="text"
+            placeholder="E-post/Admin login"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
