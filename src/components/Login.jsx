@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import "../styles/Login.css"; 
 
 const API_URL = "https://crudapi.co.uk/api/v1/users"; 
@@ -9,6 +10,7 @@ function Login({ onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -16,6 +18,8 @@ function Login({ onClose }) {
 
     // admin login
     if (email === "admin" && password === "admin") {
+        const adminUser = { email: "admin", role: "admin" };
+        login(adminUser);
         setMessage("Administrator innlogging vellykket!");
         setTimeout(() => {
             navigate("/admin");
@@ -41,22 +45,20 @@ function Login({ onClose }) {
         const user = users.find((user) => user.email === email && user.password === password);
 
         if (user) {
+            login(user);
           setMessage("Ready to padel! Du er nå logget inn!");
           setTimeout(() => { navigate("/booking");}, 2000); 
-          if (user.email === "admin" && user.password === "admin") {
-            navigate("/admin");
-          }
-        } else {
-            navigate("/booking");
-        }
       } else {
-        setMessage("Feil epost eller passord");
+        setMessage("Feil E-post eller passord");
       }
+    } else {
+        setMessage("Kunne ikke finne deg akkurat nå. Prøb igjen senere");
+    }
     } catch (error) {
       setMessage("Nettverksfeil: Sjekk internettforbindelsen.");
     }
   };
-
+  
   return (
     <div className="login-popup">
       <div className="login-box">
