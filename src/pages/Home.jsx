@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "./Home.css";
-import Register from "./Register";
+import "../styles/Home.css";
+import Register from "../components/Register";
 
 function Home() {
     const [showRegister, setShowRegister] = useState(false);
