@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../styles/Register.css";
 
-const API_URL = "https://crudapi.co.uk/api/v1/probe"; 
+const API_URL = "https://crudapi.co.uk/api/v1/users"; 
 const API_KEY = "Bearer sSaxGvHdK3CL-kiKubRHp5lsQRkBwGrb41YjNDHC4XR9rzd9UA";
 
 function Register({ onClose }) {
