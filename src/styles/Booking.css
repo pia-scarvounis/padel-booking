@@ -1,0 +1,62 @@
+/* sentraliserer hele bookingsiden */
+.booking-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    width: 1300px;
+    padding: 25px;
+    margin: 15pxx;
+    background-color: #ffffff;
+    border-radius: 10px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.booking-list { 
+    flex: 1;
+  background-color: #f9f9f9; 
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.booking-calendar {
+    width: 60%;
+}
+
+.booking-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* velkomsthilsen */
+.booking-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #070f17;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* farge brukernavn */
+.user-name {
+    color: #ff6f00;
+}
+
+/* undertekst for booking */
+.booking-subtitle {
+    font-size: 1.3rem;
+    color: #444;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+
+
+
+

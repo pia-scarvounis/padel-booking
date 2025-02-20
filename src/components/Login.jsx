@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import "../styles/Login.css"; 
 
 const API_URL = "https://crudapi.co.uk/api/v1/users"; 
-const API_KEY = "Bearer sSaxGvHdK3CL-kiKubRHp5lsQRkBwGrb41YjNDHC4XR9rzd9UA";
+const API_KEY = "Bearer 4tmmeJfd5UT7Gnn_WEMg6ZgDHk1AgsXAqzSYmIdPiQkxCSkGiA";
 
 function Login({ onClose }) {
   const [email, setEmail] = useState("");
