@@ -16,7 +16,7 @@ function BookingCalendar({ bookings, onSelectTime, filters }) {
   // genererer ukedager (man-søndag)
   const generateWeekDays = () => {
     let days = [];
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 1000; i++) {
       let date = new Date(currentWeekStart);
       date.setDate(currentWeekStart.getDate() + i);
       days.push(date.toISOString().split("T")[0]); // konvertering til YYYY-MM-DD
@@ -40,7 +40,7 @@ function BookingCalendar({ bookings, onSelectTime, filters }) {
   
           // FILTRERING AV DATO, TID OG ANTALL SPILLERE
           if (
-            (filters?.day && filters.day !== date) || 
+            (filters?.day && new Date(filters.day).toISOString().split("T")[0] !== date) || 
             (filters?.time && filters.time !== `${hour}:00`) || 
             (filters?.players && filters.players !== court.players.toString())
           ) {

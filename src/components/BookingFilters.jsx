@@ -16,6 +16,7 @@ function BookingFilters({ onFilterChange }) {
 
   const applyFilters = () => {
     onFilterChange(filterValues);
+    onFilterChange(newFilters);
   };
 
   return (
