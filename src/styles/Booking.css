@@ -13,25 +13,6 @@
 
 }
 
-.booking-list { 
-    flex: 1;
-  background-color: #f9f9f9; 
-  padding: 15px;
-  border-radius: 10px;
-}
-
-.booking-calendar {
-    width: 60%;
-}
-
-.booking-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-top: 20px;
-}
-
 /* velkomsthilsen */
 .booking-title {
     font-size: 2.5rem;
@@ -54,6 +35,37 @@
     margin-bottom: 20px;
     text-align: center;
 }
+
+/* user booking list */ 
+.booking-list { 
+    flex: 1;
+  background-color: #f9f9f9; 
+  padding: 15px;
+  border-radius: 10px;
+}
+/* slette og redigere ikon på users booking list */ 
+.booking-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 13px; 
+}
+
+.icon-container {
+    cursor: pointer;
+    font-size: 1.2rem; 
+    margin-left: 10px; 
+}
+
+.icon-container:hover {
+    opacity: 0.7; 
+    transform: scale(1.1);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+
+
+
 
 
 

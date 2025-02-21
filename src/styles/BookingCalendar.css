@@ -11,6 +11,19 @@
     padding-top: 20px;
 }
 
+/* booking calender og container */ 
+.booking-calendar {
+    width: 60%;
+}
+
+.booking-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
 /* overskrifter */
 .booking-calendar th {
     background-color: #070f17;
@@ -59,7 +72,7 @@
     background-color: #872825;
 }
 
-/* kenavigasjon */
+/* navigasjon */
 .week-nav {
     display: flex;
     justify-content: center;

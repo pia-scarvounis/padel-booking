@@ -33,18 +33,10 @@ function BookingList() {
                     return;
                 }
 
-                console.log("✅ Innlogget bruker:", user.email);
-
-                // logg ut ALLE bookingene før filtrering
-                console.log("full booking-liste før filtrering:", data.items);
-
                 // filtrer ut kun brukerens bookinger
                 const userBookings = data.items.filter(
                     (booking) => booking.userEmail === user.email
                 );
-
-                // logg ut etter filtrering
-                console.log("bvookinger etter filtrering:", userBookings);
 
                 setBookings(userBookings);
             } else {
@@ -52,6 +44,29 @@ function BookingList() {
             }
         } catch (error) {
             console.error("feil ved henting av bookinger:", error);
+        }
+    };
+
+    // slett booking-funksjon 
+    const deleteBooking = async (bookingId) => {
+        if (!window.confirm("Er du sikker på at du vil slette denne bookingen?")) return;
+
+        try {
+            const response = await fetch(`${API_URL}/${bookingId}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: API_KEY,
+                },
+            });
+
+            if (response.ok) {
+                alert("Booking slettet!");
+                setBookings((prev) => prev.filter((booking) => booking._uuid !== bookingId));
+            } else {
+                console.error("Feil ved sletting av booking");
+            }
+        } catch (error) {
+            console.error("Nettverksfeil ved sletting:", error);
         }
     };
 
@@ -66,7 +81,13 @@ function BookingList() {
                 <ul>
                     {bookings.map((booking) => (
                         <li key={booking._uuid}>
-                            {booking.date} kl {booking.time} på {booking.court} ({booking.players} spillere)
+                            <strong>{booking.date}</strong> kl <strong>{booking.time}</strong> på <strong>{booking.court}</strong> ({booking.players} spillere) 
+                            <p>📧 E-post: {booking.userEmail}</p> 
+                            {booking.teammates && booking.teammates.length > 0 && (
+                            <p>👥 Medspillere: {booking.teammates.join(", ")}</p> )}
+                    
+                            <span className="icon-container" onClick={() => deleteBooking(booking._uuid)}>🗑️</span>
+   
                         </li>
                     ))}
                 </ul>

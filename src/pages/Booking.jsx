@@ -45,13 +45,45 @@ function Booking() {
   const handleBooking = async (selectedTime) => {
     console.log("Reservering valgt:", selectedTime);
 
+    let numPlayers = selectedTime.players; 
+
+    let teammates = [];
+    if (numPlayers > 1) {
+        let validInput = false;
+        while (!validInput) {
+            const teammateNames = prompt(`Skriv inn navn på ${numPlayers - 1} medspiller(e), separert med komma: (Trykk "Avbryt" for å avbryte)`);
+
+            // hvis bruker trykker avbryt eller lar det stå tomt: avbryt hele bookingen
+            if (teammateNames === null) {
+                alert("Booking avbrutt.");
+                return;
+            }
+
+            if (teammateNames.trim() === "") {
+                alert("Du må skrive inn navn på medspillere, eller trykke Avbryt for å avbryte.");
+                continue;
+            }
+
+            teammates = teammateNames.split(",").map(name => name.trim());
+
+            // sjekke at riktig antall medspillere er skrevet inn
+            if (teammates.length === numPlayers - 1) {
+                validInput = true; // går ut av loopen hvis alt er ok
+            } else {
+                alert(`Du må skrive inn ${numPlayers - 1} navn, separert med komma.`);
+            }
+        }
+    }
+
     const newBooking = {
       "date": selectedTime.date,
       "time": selectedTime.time,
       "court": selectedTime.court,
-      "players": selectedTime.players,
+      "players": numPlayers,
+      "teammates": teammates,
       "isBooked": true,
-      "userEmail": user?.email
+      "userEmail": user?.email,
+      "userName": user?.name
     };
 
     try {

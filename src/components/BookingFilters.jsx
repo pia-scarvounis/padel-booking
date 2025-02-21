@@ -47,7 +47,7 @@ function BookingFilters({ onFilterChange }) {
       </label>
 
       <label>
-        Antall spillere:
+        Banetype:
         <select name="players" value={filterValues.players} onChange={handleFilterChange}>
           <option value="">Alle</option>
           <option value="2">2 spillere</option>
