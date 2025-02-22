@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../styles/BookingCalendar.css";
+import "../styles/Booking.css";
 
 const OPENING_HOURS = { start: 8, end: 22 };
 
@@ -12,11 +12,12 @@ const COURTS = [
 
 function BookingCalendar({ bookings, onSelectTime, filters }) {
   const [currentWeekStart, setCurrentWeekStart] = useState(new Date());
+  const [visibleRows, setVisibleRows] = useState(10); // vi viser kun 10 rader om gangen
 
   // genererer ukedager (man-søndag)
   const generateWeekDays = () => {
     let days = [];
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 100; i++) {
       let date = new Date(currentWeekStart);
       date.setDate(currentWeekStart.getDate() + i);
       days.push(date.toISOString().split("T")[0]); // konvertering til YYYY-MM-DD
@@ -92,7 +93,7 @@ function BookingCalendar({ bookings, onSelectTime, filters }) {
           </tr>
         </thead>
         <tbody>
-          {availableTimes.map((time, index) => (
+          {availableTimes.slice(0, visibleRows).map((time, index) => (
             <tr key={index}>
               <td>{time.date}</td>
               <td>{time.time}</td>
@@ -111,6 +112,13 @@ function BookingCalendar({ bookings, onSelectTime, filters }) {
           ))}
         </tbody>
       </table>
+      {visibleRows < availableTimes.length ? (
+  <button className="see-more-button" onClick={() => setVisibleRows(prev => prev + 10)}>
+    Se mer ▼
+  </button>
+) : null
+
+      }
     </div>
   );
 }

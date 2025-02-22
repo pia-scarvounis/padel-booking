@@ -17,6 +17,8 @@ function Booking() {
     players: ""
   });
 
+  const [showPopup, setShowPopup] = useState(false);
+
   useEffect(() => {
     fetchBookings();
   }, []);
@@ -118,27 +120,35 @@ function Booking() {
   });
 
   return (
+    
     <div className="booking-container">
+      <div className="booking-header">
+        <button className="booking-button" onClick={() => setShowPopup(true)}>Mine bookinger</button>
+      </div>
       <h1 className="booking-title">
         Hei, <span className="user-name">{user?.name || "Padel-spiller"}!</span> 🎾
       </h1>
-      <p className="booking-subtitle">Book en ledig bane og gjør deg klar for kamp!</p>
+      <p className="booking-subtitle">Book en ledig bane, se dine bookinger og gjør deg klar for kamp!</p>
 
-  
+  <div className="booking-layout">
       <div className="filters-container">
         <BookingFilters onFilterChange={setFilters} />
       </div>
-
-      <div className="booking-layout">
-        <div className="booking-calendar">
+      <div className="calendar-container">
         <BookingCalendar bookings={bookings} onSelectTime={handleBooking} filters={filters} />
-
         </div>
-        <div className="booking-list">
-          <BookingList />
+      
+        {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup-box">
+          
+<button className="close-button" onClick={() => setShowPopup(false)}>×</button>
+<BookingList />
+          </div>
         </div>
+)}
+       </div>
       </div>
-    </div>
   );
 }
 

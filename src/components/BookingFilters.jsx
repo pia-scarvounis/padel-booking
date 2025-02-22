@@ -16,7 +16,6 @@ function BookingFilters({ onFilterChange }) {
 
   const applyFilters = () => {
     onFilterChange(filterValues);
-    onFilterChange(newFilters);
   };
 
   return (
@@ -55,12 +54,13 @@ function BookingFilters({ onFilterChange }) {
           <option value="4">4 spillere</option>
         </select>
       </label>
-
+<div className="filter-buttons">
       <button onClick={applyFilters}>Bruk filter</button>
 <button onClick={() => {
   setFilterValues({ day: "", time: "", players: "" });
   onFilterChange({ day: "", time: "", players: "" });
 }}>Nullstill filter</button>
+    </div>
     </div>
   );
 }

@@ -82,9 +82,9 @@ function BookingList() {
                     {bookings.map((booking) => (
                         <li key={booking._uuid}>
                             <strong>{booking.date}</strong> kl <strong>{booking.time}</strong> på <strong>{booking.court}</strong> ({booking.players} spillere) 
-                            <p>📧 E-post: {booking.userEmail}</p> 
+                            <p>E-post: {booking.userEmail}</p> 
                             {booking.teammates && booking.teammates.length > 0 && (
-                            <p>👥 Medspillere: {booking.teammates.join(", ")}</p> )}
+                            <p>Medspillere: {booking.teammates.join(", ")}</p> )}
                     
                             <span className="icon-container" onClick={() => deleteBooking(booking._uuid)}>🗑️</span>
    
