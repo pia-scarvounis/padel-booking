@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Booking from "./pages/Booking";
+import AdminDashboard from "./pages/AdminDashboard"
 import { AuthProvider } from "./context/AuthContext";
-import AdminDashboard from "./components/AdminDashboard";
+;
 
 
 function App() {

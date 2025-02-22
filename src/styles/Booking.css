@@ -43,6 +43,122 @@
 }
 
 
+/* POPUP MINE BOOKINGER /*
+
+/* popup-bakgrunn */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+/* POPUP MINE BOOKINGER BOX: */
+
+.popup-box {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  width: 450px; /* Gjør boksen litt større */
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-height: 300px;
+}
+
+.popup-box .booking-item {
+  padding: 20px 0; 
+  border-bottom: 2px solid #ddd; 
+}
+
+.popup-box .booking-item:last-child {
+  border-bottom: none;
+}
+
+
+/* legger mellomrom mellom bookingene */
+.popup-box ul {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+}
+
+/* "mine bookinger" kort */
+.popup-box ul li {
+  padding: 15px;
+  border-bottom: 1px solid #ddd; 
+  text-align: center;
+}
+
+
+/* X-knapp uten bakgrunnsfarge */
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 18px;
+  color: #333; 
+  background: none;
+  cursor: pointer;
+  padding: 5px;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.close-button:hover {
+  color: #ff6f00;
+  background: none;
+  box-shadow: none;
+  transform: scale(1.2);
+}
+
+.close-button:active {
+  transform: scale(1);
+}
+
+.close-button:focus {
+  outline: none;
+  box-shadow: none;
+  background: none;
+}
+
+/* knapp for å åpne "mine bookinger" */
+.bookinglist-button, .logout-button {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.bookinglist-button:hover, .logout-button:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+
+.booking-header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  gap: 15px; 
+  padding: 10px 20px;
+}
+
+
 
 /* FILTRERING */
 
@@ -282,117 +398,3 @@ padding: 15px;
 
 
 
-/* POPUP MINE BOOKINGER /*
-
-/* popup-bakgrunn */
-.popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-
-/* POPUP MINE BOOKINGER BOX: */
-
-.popup-box {
-    background: white;
-    padding: 25px;
-    border-radius: 8px;
-    width: 450px; /* Gjør boksen litt større */
-    text-align: center;
-    position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    min-height: 300px;
-}
-
-.popup-box .booking-item {
-    padding: 20px 0; 
-    border-bottom: 2px solid #ddd; 
-}
-
-.popup-box .booking-item:last-child {
-    border-bottom: none;
-}
-
-
-/* legger mellomrom mellom bookingene */
-.popup-box ul {
-    list-style: none; 
-    padding: 0;
-    margin: 0;
-}
-
-/* "mine bookinger" kort */
-.popup-box ul li {
-    padding: 15px;
-    border-bottom: 1px solid #ddd; 
-    text-align: center;
-}
-
-
-/* X-knapp uten bakgrunnsfarge */
-.close-button {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    font-size: 18px;
-    color: #333; 
-    background: none;
-    cursor: pointer;
-    padding: 5px;
-    width: auto;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-.close-button:hover {
-    color: #ff6f00;
-    background: none;
-    box-shadow: none;
-    transform: scale(1.2);
-}
-
-.close-button:active {
-    transform: scale(1);
-}
-
-.close-button:focus {
-    outline: none;
-    box-shadow: none;
-    background: none;
-}
-
-/* knapp for å åpne "mine bookinger" */
-.bookinglist-button, .logout-button {
-    background: #333;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.bookinglist-button:hover, .logout-button:hover {
-    background: #333;
-    transform: scale(1.05);
-}
-
-.booking-header {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end; 
-    align-items: center;
-    gap: 15px; 
-    padding: 10px 20px;
-}
