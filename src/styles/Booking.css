@@ -11,6 +11,14 @@
   margin: 0 auto;
 }
 
+.title-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center;
+}
+
+
 /* velkomsthilsen */
 .booking-title {
   font-size: 2.5rem;
@@ -321,11 +329,11 @@ padding: 15px;
     margin: 0;
 }
 
-/* styler hver booking som et eget kort */
+/* "mine bookinger" kort */
 .popup-box ul li {
     padding: 15px;
-    border-bottom: 1px solid #ddd; /* Skillelinje mellom hver booking */
-    text-align: left;
+    border-bottom: 1px solid #ddd; 
+    text-align: center;
 }
 
 
@@ -365,7 +373,7 @@ padding: 15px;
 }
 
 /* knapp for å åpne "mine bookinger" */
-.booking-button {
+.bookinglist-button, .logout-button {
     background: #333;
     color: white;
     border: none;
@@ -375,7 +383,16 @@ padding: 15px;
     font-size: 14px;
 }
 
-.booking-button:hover {
+.bookinglist-button:hover, .logout-button:hover {
     background: #333;
     transform: scale(1.05);
+}
+
+.booking-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    gap: 15px; 
+    padding: 10px 20px;
 }

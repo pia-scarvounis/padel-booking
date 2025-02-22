@@ -20,6 +20,7 @@ function BookingFilters({ onFilterChange }) {
 
   return (
     <div className="filters-container">
+      <h3> Tilpass dit søk:</h3>
       <label>
         Dato:
         <input

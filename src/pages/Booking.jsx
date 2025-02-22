@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import BookingCalendar from "../components/BookingCalendar";
 import BookingList from "../components/BookingList";
@@ -9,12 +10,13 @@ const API_URL = "https://crudapi.co.uk/api/v1/bookings";
 const API_KEY = "Bearer sSaxGvHdK3CL-kiKubRHp5lsQRkBwGrb41YjNDHC4XR9rzd9UA";
 
 function Booking() {
-  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { user, logout } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
   const [filters, setFilters] = useState({
     day: "",
     time: "",
-    players: ""
+    players: "",
   });
 
   const [showPopup, setShowPopup] = useState(false);
@@ -44,63 +46,74 @@ function Booking() {
     }
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   const handleBooking = async (selectedTime) => {
     console.log("Reservering valgt:", selectedTime);
 
-    let numPlayers = selectedTime.players; 
+    let numPlayers = selectedTime.players;
 
     let teammates = [];
     if (numPlayers > 1) {
-        let validInput = false;
-        while (!validInput) {
-            const teammateNames = prompt(`Skriv inn navn på ${numPlayers - 1} medspiller(e), separert med komma: (Trykk "Avbryt" for å avbryte)`);
+      let validInput = false;
+      while (!validInput) {
+        const teammateNames = prompt(
+          `Skriv inn navn på ${
+            numPlayers - 1
+          } medspiller(e), separert med komma: (Trykk "Avbryt" for å avbryte)`
+        );
 
-            // hvis bruker trykker avbryt eller lar det stå tomt: avbryt hele bookingen
-            if (teammateNames === null) {
-                alert("Booking avbrutt.");
-                return;
-            }
-
-            if (teammateNames.trim() === "") {
-                alert("Du må skrive inn navn på medspillere, eller trykke Avbryt for å avbryte.");
-                continue;
-            }
-
-            teammates = teammateNames.split(",").map(name => name.trim());
-
-            // sjekke at riktig antall medspillere er skrevet inn
-            if (teammates.length === numPlayers - 1) {
-                validInput = true; // går ut av loopen hvis alt er ok
-            } else {
-                alert(`Du må skrive inn ${numPlayers - 1} navn, separert med komma.`);
-            }
+        // hvis bruker trykker avbryt eller lar det stå tomt: avbryt hele bookingen
+        if (teammateNames === null) {
+          alert("Booking avbrutt.");
+          return;
         }
+
+        if (teammateNames.trim() === "") {
+          alert(
+            "Du må skrive inn navn på medspillere, eller trykke Avbryt for å avbryte."
+          );
+          continue;
+        }
+
+        teammates = teammateNames.split(",").map((name) => name.trim());
+
+        // sjekke at riktig antall medspillere er skrevet inn
+        if (teammates.length === numPlayers - 1) {
+          validInput = true; // går ut av loopen hvis alt er ok
+        } else {
+          alert(`Du må skrive inn ${numPlayers - 1} navn, separert med komma.`);
+        }
+      }
     }
 
     const newBooking = {
-      "date": selectedTime.date,
-      "time": selectedTime.time,
-      "court": selectedTime.court,
-      "players": numPlayers,
-      "teammates": teammates,
-      "isBooked": true,
-      "userEmail": user?.email,
-      "userName": user?.name
+      date: selectedTime.date,
+      time: selectedTime.time,
+      court: selectedTime.court,
+      players: numPlayers,
+      teammates: teammates,
+      isBooked: true,
+      userEmail: user?.email,
+      userName: user?.name,
     };
 
     try {
       const response = await fetch(API_URL, {
         method: "POST",
         headers: {
-          "Authorization": API_KEY,
-          "Content-Type": "application/json"
+          Authorization: API_KEY,
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify([newBooking]) // API krever en array
+        body: JSON.stringify([newBooking]), // API krever en array
       });
 
       if (response.ok) {
         alert("Bane reservert!");
-        fetchBookings(); 
+        fetchBookings();
       } else {
         console.error("feil ved booking", await response.json());
         alert("Kunne ikke reservere banen. Prøv igjen.");
@@ -120,51 +133,54 @@ function Booking() {
   });
 
   return (
-    
     <div className="booking-container">
       <div className="booking-header">
-        <button className="booking-button" onClick={() => setShowPopup(true)}>Mine bookinger</button>
-      </div>
+        <div className="title-container">
       <h1 className="booking-title">
-        Hei, <span className="user-name">{user?.name || "Padel-spiller"}!</span> 🎾
+        Hei, <span className="user-name">{user?.name || "Padel-spiller"}!</span>{" "}
+        🎾
       </h1>
-      <p className="booking-subtitle">Book en ledig bane, se dine bookinger og gjør deg klar for kamp!</p>
+      <p className="booking-subtitle">
+        Book en ledig bane, se dine bookinger og gjør deg klar for kamp!
+      </p>
+      </div>
+        <button className="bookinglist-button" onClick={() => setShowPopup(true)}>
+          Mine bookinger
+        </button>
+        <button className="logout-button" onClick={handleLogout}>
+  Logg ut
+</button>
 
-  <div className="booking-layout">
-      <div className="filters-container">
-        <BookingFilters onFilterChange={setFilters} />
       </div>
-      <div className="calendar-container">
-        <BookingCalendar bookings={bookings} onSelectTime={handleBooking} filters={filters} />
+
+      <div className="booking-layout">
+        <div className="filters-container">
+          <BookingFilters onFilterChange={setFilters} />
         </div>
-      
+        <div className="calendar-container">
+          <BookingCalendar
+            bookings={bookings}
+            onSelectTime={handleBooking}
+            filters={filters}
+          />
+        </div>
+
         {showPopup && (
-        <div className="popup-overlay">
-          <div className="popup-box">
-          
-<button className="close-button" onClick={() => setShowPopup(false)}>×</button>
-<BookingList />
+          <div className="popup-overlay">
+            <div className="popup-box">
+              <button
+                className="close-button"
+                onClick={() => setShowPopup(false)}
+              >
+                ×
+              </button>
+              <BookingList />
+            </div>
           </div>
-        </div>
-)}
-       </div>
+        )}
       </div>
+    </div>
   );
 }
 
 export default Booking;
-
-
-
-
-
-  
-  
-  
-
-
-
-
-
-
-  
