@@ -33,13 +33,13 @@
 
 
 
-/* log ut knapp - header */
+/* logg ut knapp - header */
 .admin-logout {
     background: #333;
     color: white;
     position: absolute;
     right: 90px;
-    top: 20px;
+    top: 75px;
 }
 
 .admin-logout:hover {

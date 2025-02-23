@@ -13,6 +13,7 @@ function AdminDashboard() {
   const [bookings, setBookings] = useState([]);
   const [filters, setFilters] = useState({
     day: "",
+    time: "",
     court: "",
     players: "",
   });
@@ -48,13 +49,14 @@ function AdminDashboard() {
   };
 
   if (loading) {
-    return <p>Later admin-dashboard...</p>; 
+    return <p>Laster admin-dashboard...</p>; 
   }
 
 
   const filteredBookings = bookings.filter((booking) => {
     return (
       (!filters.day || booking.date === filters.day) &&
+      (!filters.time || booking.time === filters.time) &&
       (!filters.court || booking.court === filters.court) &&
       (!filters.players || booking.players.toString() === filters.players)
     );
@@ -65,7 +67,7 @@ function AdminDashboard() {
       <div className="header">
       <h1 className="admin-title">Velkommen til Admin Dashboard</h1>
       <p className="admin-subtitle">
-        Her får du en oversikt over bookinger og brukere.
+        Her får du en oversikt over alle bookinger og registrerte brukere.
         <button
         className="admin-logout"
         onClick={() => navigate("/")}
@@ -73,13 +75,13 @@ function AdminDashboard() {
         Logg ut
       </button>
       </p></div>
-      <BookingFilters onFilterChange={setFilters} />
       <h2>Alle bookinger</h2>
+      <BookingFilters onFilterChange={setFilters} />
       <table className="admin-table">
         <thead>
           <tr>
             <th>Spiller</th>
-            <th>Medspillere</th>
+            <th>Medspiller(e)</th>
             <th>Dato</th>
             <th>Tid</th>
             <th>Bane</th>
