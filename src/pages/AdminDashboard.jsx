@@ -55,10 +55,17 @@ function AdminDashboard() {
 
   return (
     <div className="admin-container">
+      <div className="header">
       <h1 className="admin-title">Velkommen til Admin Dashboard</h1>
       <p className="admin-subtitle">
         Her får du en oversikt over bookinger og brukere.
-      </p>
+        <button
+        className="admin-logout"
+        onClick={() => navigate("/")}
+      >
+        Logg ut
+      </button>
+      </p></div>
       <BookingFilters onFilterChange={setFilters} />
       <h2>Alle bookinger</h2>
       <table className="admin-table">
@@ -90,12 +97,6 @@ function AdminDashboard() {
           ))}
         </tbody>
       </table>
-      <button
-        className="admin-button admin-logout"
-        onClick={() => navigate("/")}
-      >
-        Logg ut
-      </button>
     </div>
   );
 }

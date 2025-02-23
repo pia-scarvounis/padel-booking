@@ -11,6 +11,41 @@
   margin: 0 auto;
 }
 
+/* header */
+.header {
+  width: 100vw; 
+  position: relative; 
+  left: 0; 
+  background: #f2e3e3be; 
+  color: white;
+  padding: 30px;
+}
+
+/* knapp for å åpne "mine bookinger" og "logout" */
+.bookinglist-button, .logout-button {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.bookinglist-button:hover, .logout-button:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+
+.btncontainer-header {
+  width: 100%;
+  display: flex;
+  justify-content:space-evenly;
+  align-items: center;
+  gap: 15px; 
+  padding: 20px 30px;
+}
+
 .title-container {
     display: flex;
     flex-direction: column; 
@@ -43,6 +78,7 @@
 }
 
 
+
 /* POPUP MINE BOOKINGER /*
 
 /* popup-bakgrunn */
@@ -58,7 +94,6 @@
   align-items: center;
   z-index: 1000;
 }
-
 
 /* POPUP MINE BOOKINGER BOX: */
 
@@ -133,30 +168,6 @@
   background: none;
 }
 
-/* knapp for å åpne "mine bookinger" */
-.bookinglist-button, .logout-button {
-  background: #333;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.bookinglist-button:hover, .logout-button:hover {
-  background: #333;
-  transform: scale(1.05);
-}
-
-.booking-header {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end; 
-  align-items: center;
-  gap: 15px; 
-  padding: 10px 20px;
-}
 
 
 
@@ -165,13 +176,16 @@
 /* filtreringsboks */
 .filters-container {
   max-width: 500px;
-padding: 15px;
+  padding: 15px;
   border-radius: 8px;
   text-align: center;
   width: 100%;
-  margin-top: 15px;
   background: #fff;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  margin: 0 auto; 
 }
 
 /* filtreringsboks: label og input */

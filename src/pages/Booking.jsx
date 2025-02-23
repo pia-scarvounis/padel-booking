@@ -134,7 +134,7 @@ function Booking() {
 
   return (
     <div className="booking-container">
-      <div className="booking-header">
+      <div className="header">
         <div className="title-container">
       <h1 className="booking-title">
         Hei, <span className="user-name">{user?.name || "Padel-spiller"}!</span>{" "}
@@ -144,13 +144,14 @@ function Booking() {
         Book en ledig bane, se dine bookinger og gjør deg klar for kamp!
       </p>
       </div>
+      <div className="btncontainer-header">
         <button className="bookinglist-button" onClick={() => setShowPopup(true)}>
           Mine bookinger
         </button>
         <button className="logout-button" onClick={handleLogout}>
   Logg ut
 </button>
-
+</div>
       </div>
 
       <div className="booking-layout">

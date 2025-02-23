@@ -5,6 +5,16 @@
     text-align: center;
 }
 
+    .header {
+        width: 100vw; 
+        position: relative; 
+        left: 0; 
+        background: #f2e3e3be; 
+        color: white;
+        padding: 30px;
+      
+}
+
 .admin-title {
     font-size: 2.5rem;
   font-weight: bold;
@@ -21,6 +31,21 @@
     text-align: center;
 }
 
+
+
+/* log ut knapp - header */
+.admin-logout {
+    background: #333;
+    color: white;
+    position: absolute;
+    right: 90px;
+    top: 20px;
+}
+
+.admin-logout:hover {
+    background: #222;
+}
+
 .admin-buttons {
     width: 100%;
   padding: 10px;
@@ -33,24 +58,7 @@
   transition: background-color 0.3s;
 }
 
-.admin-button {
-    background: #ff6f00;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-.admin-button:hover {
-    background: #e65c00;
-    transform: scale(1.05);
-}
-
-
+/* tabell bookingoversikt */ 
 .admin-table {
     width: 100%;
     border-collapse: collapse;
@@ -121,11 +129,3 @@
   }
   
 
-.admin-logout {
-    background: #333;
-    color: white;
-}
-
-.admin-logout:hover {
-    background: #222;
-}
