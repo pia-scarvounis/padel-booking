@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import BookingFilters from "../components/BookingFilters";
+import CreateBookingPopup from "../components/CreateBookingPopup";
 import "../styles/AdminDashboard.css";
 
 const API_URL = "https://crudapi.co.uk/api/v1/bookings";
@@ -11,6 +12,7 @@ function AdminDashboard() {
   const navigate = useNavigate();
   const { user, logout, loading } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
+  const [showCreatePopup, setShowCreatePopup] = useState(false);
   const [filters, setFilters] = useState({
     day: "",
     time: "",
@@ -68,15 +70,25 @@ function AdminDashboard() {
       <h1 className="admin-title">Velkommen til Admin Dashboard</h1>
       <p className="admin-subtitle">
         Her får du en oversikt over alle bookinger og registrerte brukere.
-        <button
-        className="admin-logout"
+        <div className="btncontainer-header">
+        <button className="createbooking-button" onClick={() => setShowCreatePopup(true)}>Opprett ny booking</button>
+ <button
+        className="logout-button"
         onClick={() => navigate("/")}
       >
         Logg ut
       </button>
+      </div>
       </p></div>
       <h2>Alle bookinger</h2>
       <BookingFilters onFilterChange={setFilters} />
+      {showCreatePopup && (
+  <CreateBookingPopup 
+    onClose={() => setShowCreatePopup(false)} 
+    onBookingCreated={fetchBookings}
+  />
+)}
+
       <table className="admin-table">
         <thead>
           <tr>
@@ -91,7 +103,7 @@ function AdminDashboard() {
         </thead>
         <tbody>
           {filteredBookings.map((booking) => (
-            <tr key={booking._id}>
+            <tr key={booking._uuid}>
               <td>{booking.userName}</td>
               <td>{booking.teammates && booking.teammates.join(", ")}</td>
               <td>{booking.date}</td>
