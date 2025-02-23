@@ -9,13 +9,23 @@ const API_KEY = "Bearer sSaxGvHdK3CL-kiKubRHp5lsQRkBwGrb41YjNDHC4XR9rzd9UA";
 
 function AdminDashboard() {
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { user, logout, loading } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
   const [filters, setFilters] = useState({
     day: "",
     court: "",
     players: "",
   });
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user || user.role !== "admin") {
+      navigate("/");
+    } else {
+      fetchBookings();
+    }
+  }, [user, loading, navigate]);
+
   const fetchBookings = async () => {
     try {
       const response = await fetch(API_URL, {
@@ -37,13 +47,10 @@ function AdminDashboard() {
     }
   };
 
-  useEffect(() => {
-    if (!user || user.role !== "admin") {
-      navigate("/");
-    } else {
-      fetchBookings();
-    }
-  }, [user, navigate]);
+  if (loading) {
+    return <p>Later admin-dashboard...</p>; 
+  }
+
 
   const filteredBookings = bookings.filter((booking) => {
     return (
