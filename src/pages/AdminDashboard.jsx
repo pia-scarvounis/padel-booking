@@ -13,6 +13,8 @@ function AdminDashboard() {
   const { user, logout, loading } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
   const [showCreatePopup, setShowCreatePopup] = useState(false);
+  const [showFilterPopup, setShowFilterPopup] = useState(false);
+
   const [filters, setFilters] = useState({
     day: "",
     time: "",
@@ -51,9 +53,8 @@ function AdminDashboard() {
   };
 
   if (loading) {
-    return <p>Laster admin-dashboard...</p>; 
+    return <p>Laster admin-dashboard...</p>;
   }
-
 
   const filteredBookings = bookings.filter((booking) => {
     return (
@@ -67,27 +68,54 @@ function AdminDashboard() {
   return (
     <div className="admin-container">
       <div className="header">
-      <h1 className="admin-title">Velkommen til Admin Dashboard</h1>
-      <p className="admin-subtitle">
-        Her får du en oversikt over alle bookinger og registrerte brukere.
-        <div className="btncontainer-header">
-        <button className="createbooking-button" onClick={() => setShowCreatePopup(true)}>Opprett ny booking</button>
- <button
-        className="logout-button"
-        onClick={() => navigate("/")}
-      >
-        Logg ut
-      </button>
+        <h1 className="admin-title">Velkommen til Admin Dashboard</h1>
+        <div className="admin-subtitle">
+         <p>Her får du en oversikt over alle bookinger og registrerte brukere. </p>
+          <div className="btncontainer-header">
+            <button
+              className="createbooking-button"
+              onClick={() => setShowCreatePopup(true)}
+            >
+              Opprett ny booking
+            </button>
+            <button
+              className="filter-button"
+              onClick={() => setShowFilterPopup(true)}
+            >
+              Filtrer bookinger
+            </button>
+
+            <button className="logout-button" onClick={() => navigate("/")}>
+              Logg ut
+            </button>
+          </div>
       </div>
-      </p></div>
-      <h2>Alle bookinger</h2>
-      <BookingFilters onFilterChange={setFilters} />
+      </div>
+      {showFilterPopup && (
+        <div className="popup-overlay">
+          <div className="popup-box">
+            <BookingFilters
+              onFilterChange={(filters) => {
+                setFilters(filters);
+                setShowFilterPopup(false);
+              }}
+            />
+            <div className="close-filter-button">
+            <button onClick={() => setShowFilterPopup(false)}>Lukk</button>
+            </div>
+          </div>
+        </div>
+      )}
       {showCreatePopup && (
-  <CreateBookingPopup 
-    onClose={() => setShowCreatePopup(false)} 
-    onBookingCreated={fetchBookings}
-  />
-)}
+        <CreateBookingPopup
+          onClose={() => setShowCreatePopup(false)}
+          onBookingCreated={fetchBookings}
+        />
+      )}
+      <h2>Alle bookinger</h2>
+      
+       <div/>
+    
 
       <table className="admin-table">
         <thead>

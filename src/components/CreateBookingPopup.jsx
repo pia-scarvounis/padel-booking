@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 const API_URL = "https://crudapi.co.uk/api/v1/bookings";
@@ -11,7 +11,7 @@ const COURTS = [
   { id: 4, name: "Bane 4", players: 4 },
 ];
 
-function CreateBookingPopup({ onClose, onBookingCreated }) {
+function CreateBookingPopup({ bookings =[], onClose, onBookingCreated }) {
   const [name, setName] = useState("");
   const [teammates, setTeammates] = useState("");
   const [email, setEmail] = useState("");
@@ -23,6 +23,22 @@ function CreateBookingPopup({ onClose, onBookingCreated }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    /* dette funker ikke - finn ut hvis tid. skal ikke være mmulig å booke hvis bane/dato/tidspunkt allerede er reservert!!*/ 
+    const isBooked = bookings?.some(
+        (booking) => booking.date === date && booking.time === time && booking.court === court
+      );
+
+      if (!date || !time || !court) {
+        setMessage("Vennligst fyll ut alle feltene.");
+        return;
+      }
+
+  
+      if (isBooked) {
+        setMessage("Dette tidspunktet og banen er allerede reservert. Prøv et annet tidspunkt eller bane.");
+        return;
+      }
 
     const bookingData = [{
       userName: name,

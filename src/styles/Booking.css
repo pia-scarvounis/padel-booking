@@ -178,10 +178,10 @@
   max-width: 500px;
   padding: 15px;
   border-radius: 8px;
+  border:solid;
   text-align: center;
-  width: 100%;
+  width: 90%;
   background: #fff;
-  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center; 
@@ -202,7 +202,7 @@
 .filters-container input,
 .filters-container select {
   padding: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #090505;
   border-radius: 5px;
   font-size: 13px;
   width: 100%;
@@ -220,7 +220,7 @@
 /* filtreringsboks: knapper */
 .filter-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 8px;
   margin-top: 10px;
 }
