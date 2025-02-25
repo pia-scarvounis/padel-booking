@@ -5,6 +5,7 @@ import BookingFilters from "../components/BookingFilters";
 import CreateBookingPopup from "../components/CreateBookingPopup";
 import EditBookingPopup from "../components/EditBookingPopup";
 import DeleteBookingPopup from "../components/DeleteBookingPopup";
+import BookingCalendar from "../components/BookingCalendar";
 import "../styles/AdminDashboard.css";
 
 const API_URL = "https://crudapi.co.uk/api/v1/bookings";
@@ -15,12 +16,13 @@ function AdminDashboard() {
   const { user, logout, loading } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
   const [showCreatePopup, setShowCreatePopup] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
   const [showFilterPopup, setShowFilterPopup] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
-const [showEditPopup, setShowEditPopup] = useState(false);
-const [selectedBookingForDelete, setSelectedBookingForDelete] = useState(null);
-const [showDeletePopup, setShowDeletePopup] = useState(false);
-
+  const [showEditPopup, setShowEditPopup] = useState(false);
+  const [selectedBookingForDelete, setSelectedBookingForDelete] =
+    useState(null);
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
 
   const [filters, setFilters] = useState({
     day: "",
@@ -72,32 +74,44 @@ const [showDeletePopup, setShowDeletePopup] = useState(false);
     );
   });
 
+  /* teste om dette funker  */
+  const handleSelectTime = (timeSlot) => {
+    if (!timeSlot.isBooked) {
+      setSelectedBooking(timeSlot);
+      setShowCreatePopup(true);
+    }
+  };
+
   return (
     <div className="admin-container">
       <div className="header">
         <h1 className="admin-title">Velkommen til Admin Dashboard</h1>
         <div className="admin-subtitle">
-         <p>Her får du en oversikt over alle bookinger og registrerte brukere. </p>
+          <p>
+            Her kan ansatte opprette bookinger og se oversikt over alle bookinger.{" "}
+          </p>
           <div className="btncontainer-header">
             <button
               className="createbooking-button"
-              onClick={() => setShowCreatePopup(true)}
-            >
-              Opprett ny booking
+              onClick={() => setShowCalendar(!showCalendar)}
+            >{showCalendar ? "Skjul kalender" : "Opprett ny booking"}
             </button>
             <button
               className="filter-button"
               onClick={() => setShowFilterPopup(true)}
             >
-              Filtrer bookinger
+              Filtrer søk (siste bookinger)
             </button>
 
             <button className="logout-button" onClick={() => navigate("/")}>
               Logg ut
             </button>
           </div>
+        </div>
       </div>
-      </div>
+      {showCalendar && (
+        <BookingCalendar bookings={bookings} onSelectTime={handleSelectTime} />
+      )}
       {showFilterPopup && (
         <div className="popup-overlay">
           <div className="popup-box">
@@ -108,21 +122,28 @@ const [showDeletePopup, setShowDeletePopup] = useState(false);
               }}
             />
             <div className="close-filter-button">
-            <button onClick={() => setShowFilterPopup(false)}>Lukk</button>
+              <button onClick={() => setShowFilterPopup(false)}>Lukk</button>
             </div>
           </div>
         </div>
       )}
-      {showCreatePopup && (
+
+      {showCreatePopup && selectedBooking && (
         <CreateBookingPopup
+          bookings={bookings}
+          preselectedDate={selectedBooking.date}
+          preselectedTime={selectedBooking.time}
+          preselectedCourt={selectedBooking.court}
           onClose={() => setShowCreatePopup(false)}
-          onBookingCreated={fetchBookings}
+          onBookingCreated={() => {
+            setShowCreatePopup(false);
+            fetchBookings();
+          }}
         />
       )}
       <h2>Siste bookinger:</h2>
-      
-       <div/>
-    
+
+      <div />
 
       <table className="admin-table">
         <thead>
@@ -146,41 +167,50 @@ const [showDeletePopup, setShowDeletePopup] = useState(false);
               <td>{booking.court}</td>
               <td>{booking.players}</td>
               <td>
-                <button className="edit-button" onClick={() => {
-    setSelectedBooking(booking);
-    setShowEditPopup(true);
-     }}>✏️ Rediger</button>
-                <button className="delete-button"onClick={() => {
-    setSelectedBookingForDelete(booking);
-    setShowDeletePopup(true);
-  }}>🗑️ Slett</button>
+                <button
+                  className="edit-button"
+                  onClick={() => {
+                    setSelectedBooking(booking);
+                    setShowEditPopup(true);
+                  }}
+                >
+                  ✏️ Rediger
+                </button>
+                <button
+                  className="delete-button"
+                  onClick={() => {
+                    setSelectedBookingForDelete(booking);
+                    setShowDeletePopup(true);
+                  }}
+                >
+                  🗑️ Slett
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
       {showEditPopup && selectedBooking && (
-  <EditBookingPopup
-    booking={selectedBooking}
-    bookings={bookings}
-    onClose={() => {
-      setShowEditPopup(false);
-      setSelectedBooking(null);
-    }}
-    onBookingEdited={fetchBookings}
-  />
-)}
-{showDeletePopup && selectedBookingForDelete && (
-  <DeleteBookingPopup
-    booking={selectedBookingForDelete}
-    onClose={() => {
-      setShowDeletePopup(false);
-      setSelectedBookingForDelete(null);
-    }}
-    onBookingDeleted={fetchBookings}
-  />
-)}
-
+        <EditBookingPopup
+          booking={selectedBooking}
+          bookings={bookings}
+          onClose={() => {
+            setShowEditPopup(false);
+            setSelectedBooking(null);
+          }}
+          onBookingEdited={fetchBookings}
+        />
+      )}
+      {showDeletePopup && selectedBookingForDelete && (
+        <DeleteBookingPopup
+          booking={selectedBookingForDelete}
+          onClose={() => {
+            setShowDeletePopup(false);
+            setSelectedBookingForDelete(null);
+          }}
+          onBookingDeleted={fetchBookings}
+        />
+      )}
     </div>
   );
 }

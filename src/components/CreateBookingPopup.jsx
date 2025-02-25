@@ -11,13 +11,20 @@ const COURTS = [
   { id: 4, name: "Bane 4", players: 4 },
 ];
 
-function CreateBookingPopup({ bookings =[], onClose, onBookingCreated }) {
+function CreateBookingPopup({ 
+  bookings =[],
+   onClose, 
+   onBookingCreated,
+    preselectedDate = "", 
+    preselectedTime = "08:00", 
+    preselectedCourt = COURTS[0].name }) {
+
   const [name, setName] = useState("");
   const [teammates, setTeammates] = useState("");
   const [email, setEmail] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("08:00");
-  const [court, setCourt] = useState(COURTS[0].name);
+  const [date, setDate] = useState(preselectedDate);
+  const [time, setTime] = useState(preselectedTime);
+  const [court, setCourt] = useState(preselectedCourt);
   const [message, setMessage] = useState("");
   const { user } = useContext(AuthContext);
 
@@ -25,7 +32,7 @@ function CreateBookingPopup({ bookings =[], onClose, onBookingCreated }) {
     e.preventDefault();
 
     /* dette funker ikke - finn ut hvis tid. skal ikke være mmulig å booke hvis bane/dato/tidspunkt allerede er reservert!!*/ 
-    const isBooked = bookings?.some(
+    const isBooked = bookings.some(
         (booking) => booking.date === date && booking.time === time && booking.court === court
       );
 
@@ -122,28 +129,16 @@ function CreateBookingPopup({ bookings =[], onClose, onBookingCreated }) {
             Dato:
             <input
               type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              required
+              value={date} readOnly
             />
           </label>
           <label>
             Tid:
-            <select value={time} onChange={(e) => setTime(e.target.value)}>
-              {generateTimeOptions().map((t) => (
-                <option key={t} value={t}>{t}</option>
-              ))}
-            </select>
+            <input type="text" value={time} readOnly />
           </label>
           <label>
             Bane:
-            <select value={court} onChange={(e) => setCourt(e.target.value)}>
-              {COURTS.map((c) => (
-                <option key={c.id} value={c.name}>
-                  {c.name} ({c.players} spillere)
-                </option>
-              ))}
-            </select>
+            <input type="text" value={court} readOnly />
           </label>
           <button type="submit">Opprett booking</button>
           <button type="button" onClick={onClose}>Avbryt</button>
