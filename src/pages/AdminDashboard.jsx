@@ -33,12 +33,11 @@ function AdminDashboard() {
 
   useEffect(() => {
     if (loading) return;
-    if (!user || user.role !== "admin") {
+
+    if (!user || user.username !== "admin" || user.password !== "admin") {
       navigate("/");
-    } else {
-      fetchBookings();
     }
-  }, [user, loading, navigate]);
+  }, [user, navigate]);
 
   const fetchBookings = async () => {
     try {
