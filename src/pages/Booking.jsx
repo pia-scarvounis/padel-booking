@@ -22,6 +22,12 @@ function Booking() {
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
+    if (!user) {
+      navigate("/"); 
+    }
+  }, [user, navigate]);
+
+  useEffect(() => {
     fetchBookings();
   }, []);
 
