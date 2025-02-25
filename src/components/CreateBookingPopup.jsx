@@ -28,10 +28,20 @@ function CreateBookingPopup({
   const [message, setMessage] = useState("");
   const { user } = useContext(AuthContext);
 
+  /* finne maks antall spillere for bane */
+  const selectedCourt = COURTS.find((c) => c.name === court);
+  const maxPlayers = selectedCourt ? selectedCourt.players : 2; 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const teammateList = teammates ? teammates.split(",").map((t) => t.trim()) : [];
 
-    /* dette funker ikke - finn ut hvis tid. skal ikke være mmulig å booke hvis bane/dato/tidspunkt allerede er reservert!!*/ 
+
+    if (teammateList.length !== maxPlayers - 1) {
+      alert(`Du må legge til ${maxPlayers - 1} medspillere.`);
+      return;
+    }
+
     const isBooked = bookings.some(
         (booking) => booking.date === date && booking.time === time && booking.court === court
       );
@@ -50,11 +60,11 @@ function CreateBookingPopup({
     const bookingData = [{
       userName: name,
       userEmail: email,
-      teammates: teammates ? teammates.split(",") : [],
+      teammates: teammateList,
       date,
       time,
       court,
-      players: COURTS.find((c) => c.name === court)?.players || 0,
+      players: maxPlayers,
       isBooked: true,
     }];
 

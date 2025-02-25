@@ -14,10 +14,56 @@ function EditBookingPopup({ booking, bookings, onClose, onBookingEdited }) {
   const [date, setDate] = useState(booking.date);
   const [time, setTime] = useState(booking.time);
   const [court, setCourt] = useState(booking.court);
+  const [teammates, setTeammates] = useState(booking.teammates.join(","));
   const [message, setMessage] = useState("");
 
-  const handleSubmit = async (e) => {
+  const selectedCourt = COURTS.find((c) => c.name === court);
+  const maxPlayers = selectedCourt ? selectedCourt.players : 2;
+
+        const handleCourtChange = (e) => {
+            const newCourtName = e.target.value;
+            setCourt(newCourtName);
+        
+
+        const newCourt = COURTS.find((c) => c.name === newCourtName);
+        const newMaxPlayers = newCourt ? newCourt.players : 2;
+
+        if (newMaxPlayers !== maxPlayers) {
+            let validInput = false;
+            let newTeammates = [];
+
+            while (!validInput) {
+                const teammateNames = alert(
+                  `Fyll inn navn på korrekt antall medspiller(e): ${newMaxPlayers - 1} stk, separert med komma:`
+                );
+
+                if (teammateNames === null) {
+                    return;
+                  }
+
+    newTeammates = teammateNames.split(",").map((name) => name.trim());
+
+    if (teammateList.length !== maxPlayers - 1) {
+     validInput = true; // iut av loopen hvis input gyldig
+    } else {
+        alert(`Feil antall medspillere. Du må skrive inn ${newMaxPlayers - 1} navn`);
+        return;
+    }
+    } 
+
+    setTeammateList(newTeammates.join(","));
+}
+};
+
+const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const teammateList = teammates ? teammates.split(",").map((t) => t.trim()) : [];
+
+    if (teammateList.length !== maxPlayers - 1) {
+      alert(`Du må legge til ${maxPlayers - 1} medspillere.`);
+      return;
+    }
 
     const isBooked = bookings.some(
       (b) =>
@@ -37,6 +83,8 @@ function EditBookingPopup({ booking, bookings, onClose, onBookingEdited }) {
       date,
       time,
       court,
+      teammates: teammateList,
+      players: maxPlayers,
     };
 
     try {
@@ -90,13 +138,23 @@ function EditBookingPopup({ booking, bookings, onClose, onBookingEdited }) {
           </label>
           <label>
             Bane:
-            <select value={court} onChange={(e) => setCourt(e.target.value)}>
+            <select value={court} onChange={handleCourtChange}>
               {COURTS.map((c) => (
                 <option key={c.id} value={c.name}>
                   {c.name} ({c.players} spillere)
                 </option>
               ))}
             </select>
+          </label>
+          <label>
+          Medspillere:
+            <input
+              type="text"
+              value={teammates}
+              onChange={(e) => setTeammates(e.target.value)}
+              placeholder={`Skriv inn navn på ${maxPlayers - 1} medspillere, separert med komma`}
+              required
+            />
           </label>
           <button type="submit">Lagre endringer</button>
           <button type="button" onClick={onClose}>
