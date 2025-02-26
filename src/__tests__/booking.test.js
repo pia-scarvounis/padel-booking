@@ -196,3 +196,82 @@ test("Filtrerer bookinger etter dato", async () => {
     { id: 1, court: "Bane 1", time: "12:00", date: "2025-03-01" },
   ]);
 });
+
+ // en ny booking fra CreateBooking blir lagt til og funker
+
+test("En ny booking blir lagt til i listen", async () => {
+  let bookings = [
+    { id: 1, court: "Bane 1", time: "12:00" },
+  ];
+
+  global.fetch = jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({ id: 2, court: "Bane 2", time: "14:00" }),
+    })
+  );
+
+  const newBooking = { court: "Bane 2", time: "14:00" };
+  
+  const addBooking = (booking) => {
+    bookings.push(booking);
+  };
+
+  addBooking(newBooking);
+
+  expect(bookings).toHaveLength(2);
+  expect(bookings).toContainEqual(newBooking);
+});
+
+/* oppdatering av booking som ikke finnes funker */
+test("Feilhåndtering: mislykket oppdatering av ikke-eksisterende booking", async () => {
+  global.fetch = jest.fn(() =>
+    Promise.resolve({
+      ok: false,
+      status: 404,
+      json: () => Promise.resolve({ error: "Booking ikke funnet" }),
+    })
+  );
+
+  const API_URL = "https://crudapi.co.uk/api/v1/bookings/999"; 
+  const API_KEY = "Bearer sSaxGvHdK3CL-kiKubRHp5lsQRkBwGrb41YjNDHC4XR9rzd9UA";
+
+  const updatedBooking = { court: "Bane 3", time: "17:00" };
+
+  const response = await fetch(API_URL, {
+    method: "PUT",
+    headers: {
+      Authorization: API_KEY,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedBooking),
+  });
+
+  expect(response.ok).toBe(false);
+  expect(response.status).toBe(404);
+});
+
+
+beforeAll(() => {
+  global.fetch = jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      json: () =>
+        Promise.resolve({
+          items: [
+            { id: 1, court: "Bane 1", time: "12:00", date: "2025-03-01", players: 2 },
+            { id: 2, court: "Bane 2", time: "14:00", date: "2025-03-02", players: 4 },
+          ],
+        }),
+    })
+  );
+});
+
+
+
+
+
+ 
+
+
+

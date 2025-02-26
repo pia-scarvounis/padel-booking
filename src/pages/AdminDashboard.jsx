@@ -38,8 +38,8 @@ function AdminDashboard() {
   useEffect(() => {
     if (loading) return;
 
-    if (!user || user.username !== "admin" || user.password !== "admin") {
-      navigate("/admin");
+    if (!user || user.role !== "admin") {
+      navigate("/"); 
     }
   }, [user, navigate]);
 
@@ -102,7 +102,7 @@ function AdminDashboard() {
               className="filter-button"
               onClick={() => setShowFilterPopup(true)}
             >
-              Filtrer søk (siste bookinger)
+              Filtrer bookinger
             </button>
 
             <button className="logout-button" onClick={() => navigate("/")}>
@@ -156,7 +156,7 @@ function AdminDashboard() {
             <th>Tid</th>
             <th>Bane</th>
             <th>Spillere</th>
-            <th>Rediger / Slett</th>
+            <th>Endre / Slett</th>
           </tr>
         </thead>
         <tbody>
@@ -176,7 +176,7 @@ function AdminDashboard() {
                     setShowEditPopup(true);
                   }}
                 >
-                  ✏️ Rediger
+                  ✏️ Endre
                 </button>
                 <button
                   className="delete-button"
