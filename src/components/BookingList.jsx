@@ -81,8 +81,7 @@ function BookingList() {
                 <ul>
                     {bookings.map((booking) => (
                         <li key={booking._uuid}>
-                            <strong>{booking.date}</strong> kl <strong>{booking.time}</strong> på <strong>{booking.court}</strong> ({booking.players} spillere) 
-                            <p>E-post: {booking.userEmail}</p> 
+                            <strong>{booking.date}</strong> kl <strong>{booking.time}</strong> på <strong>{booking.court}</strong> ({booking.players} spillere)  
                             {booking.teammates && booking.teammates.length > 0 && (
                             <p>Medspillere: {booking.teammates.join(", ")}</p> )}
                     
