@@ -32,10 +32,14 @@ function AdminDashboard() {
   });
 
   useEffect(() => {
+    fetchBookings();
+  }, []);
+
+  useEffect(() => {
     if (loading) return;
 
     if (!user || user.username !== "admin" || user.password !== "admin") {
-      navigate("/");
+      navigate("/admin");
     }
   }, [user, navigate]);
 
@@ -73,7 +77,6 @@ function AdminDashboard() {
     );
   });
 
-  /* teste om dette funker  */
   const handleSelectTime = (timeSlot) => {
     if (!timeSlot.isBooked) {
       setSelectedBooking(timeSlot);
