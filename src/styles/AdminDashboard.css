@@ -1,16 +1,22 @@
+/* ADMIN-SIDEN FOR ANSATTE */ 
+
+
+/* AdminDashboard.jsx */
+
 .admin-container {
-    max-width: 100%;
-    text-align: center;
+  max-width: 100%;
+  text-align: center;
 }
 
-    .header {
-        width: 100vw; 
-        position: relative; 
-        left: 0; 
-        background: #f2e3e3be; 
-        color: white;
-        padding: 30px;
-      
+/* header */
+
+.header {
+  width: 100vw;
+  position: relative;
+  left: 0;
+  background: #f2e3e3be;
+  color: white;
+  padding: 30px;
 }
 
 .admin-title {
@@ -23,16 +29,104 @@
 }
 
 .admin-subtitle {
-    font-size: 1.3rem;
-    color: #444;
-    margin-bottom: 10px;
-    text-align: center;
+  font-size: 1.3rem;
+  color: #444;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.btncontainer-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: end;
+  gap: 15px;
+  padding: 30px;
+}
+
+.admin-logout:hover {
+  background: #222;
+  transform: scale(1.05);
+}
+
+/* siste bookinger: tabelloversikt */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.admin-table th {
+  text-align: center;
+}
+
+
+.admin-table th {
+  background-color: #070f17;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px;
+  text-align: left;
+}
+
+
+.admin-table td,
+.admin-table th {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+
+.admin-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+
+.admin-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.edit-button,
+.delete-button {
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.edit-button {
+  background-color: #093914;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #0939147b;
+}
+
+.delete-button {
+  background-color: #c71224;
+  color: white;
+  margin-left: 5px;
+}
+
+.delete-button:hover {
+  background-color: #c7122481;
 }
 
 
 
-/* logg ut knapp & create booking - header */
-.createbooking-button, .logout-button, .filter-button {
+/* fellesstyling knapper */
+
+.createbooking-button,
+.logout-button,
+.filter-button {
   background: #333;
   color: white;
   border: none;
@@ -42,10 +136,14 @@
   font-size: 14px;
 }
 
-.createbooking-button:hover, .logout-button:hover, .filter-button:hover {
+.createbooking-button:hover,
+.logout-button:hover,
+.filter-button:hover {
   background: #333;
   transform: scale(1.05);
 }
+
+/* BookingFilters.jsx */ 
 
 .close-filter-button {
   padding-top: 15px;
@@ -53,99 +151,12 @@
   justify-content: center;
 }
 
-.btncontainer-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: end;
-  gap: 15px; 
-  padding: 30px;
-}
 
-.admin-logout:hover {
-    background: #222;
-}
 
-.admin-buttons {
-    width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  color: white;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
 
-/* tabell bookingoversikt */ 
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-  }
 
-  .admin-table th {
-    text-align: center;
-  }
-  
-  /* tabelloverskrifter */
-  .admin-table th {
-    background-color: #070f17;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 12px;
-    text-align: left;
-  }
-  
-  /* tabell-celler */
-  .admin-table td, .admin-table th {
-    padding: 12px;
-    border: 1px solid #ddd; 
-  }
-  
-  /* radfarger  */
-  .admin-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  /* hover-effekt for rader */
-  .admin-table tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* styling for rediger- og slett-knapper adminoversikt */
-  .edit-button, .delete-button {
-    border: none;
-    padding: 6px 12px;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-  }
-  
-  .edit-button {
-    background-color: #093914;
-    color: white;
-  }
-  
-  .edit-button:hover {
-    background-color:  #0939147b;
-  }
-  
-  .delete-button {
-    background-color: #c71224;
-    color: white;
-    margin-left: 5px;
-  }
-  
-  .delete-button:hover {
-    background-color: #c7122481;
-  }
-  
+
+
+
+
 

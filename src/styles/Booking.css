@@ -1,6 +1,7 @@
-/* BOOKINGSIDEN */
+/* BOOKING-SIDEN FOR REGISTRERTE SPILLERE */
 
-/* sentraliserer hele bookingsiden */
+/* Booking.jsx */
+
 .booking-layout {
   display: flex;
   justify-content: space-between;
@@ -12,49 +13,17 @@
 }
 
 /* header */
+
 .header {
-  width: 100vw; 
-  position: relative; 
-  left: 0; 
-  background: #f2e3e3be; 
+  width: 100vw;
+  position: relative;
+  left: 0;
+  background: #f2e3e3be;
   color: white;
   padding: 30px;
 }
 
-/* knapp for å åpne "mine bookinger" og "logout" */
-.bookinglist-button, .logout-button {
-  background: #333;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-}
 
-.bookinglist-button:hover, .logout-button:hover {
-  background: #333;
-  transform: scale(1.05);
-}
-
-.btncontainer-header {
-  width: 100%;
-  display: flex;
-  justify-content:space-evenly;
-  align-items: center;
-  gap: 15px; 
-  padding: 20px 30px;
-}
-
-.title-container {
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    text-align: center;
-}
-
-
-/* velkomsthilsen */
 .booking-title {
   font-size: 2.5rem;
   font-weight: bold;
@@ -64,12 +33,12 @@
   text-align: center;
 }
 
-/* farge brukernavn */
+
 .user-name {
   color: #ff6f00;
 }
 
-/* undertekst for booking */
+
 .booking-subtitle {
   font-size: 1.3rem;
   color: #444;
@@ -78,10 +47,43 @@
 }
 
 
+.bookinglist-button,
+.logout-button {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
 
-/* POPUP MINE BOOKINGER /*
+.bookinglist-button:hover,
+.logout-button:hover {
+  background: #222;
+  transform: scale(1.05);
+}
 
-/* popup-bakgrunn */
+.btncontainer-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 30px;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+
+
+/* BookingList.jsx */
+
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -95,13 +97,12 @@
   z-index: 1000;
 }
 
-/* POPUP MINE BOOKINGER BOX: */
 
 .popup-box {
   background: white;
   padding: 25px;
   border-radius: 8px;
-  width: 450px; /* Gjør boksen litt større */
+  width: 450px; 
   text-align: center;
   position: relative;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -109,37 +110,52 @@
 }
 
 .popup-box .booking-item {
-  padding: 20px 0; 
-  border-bottom: 2px solid #ddd; 
+  padding: 20px 0;
+  border-bottom: 2px solid #ddd;
 }
 
 .popup-box .booking-item:last-child {
   border-bottom: none;
 }
 
-
-/* legger mellomrom mellom bookingene */
 .popup-box ul {
-  list-style: none; 
+  list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* "mine bookinger" kort */
+
 .popup-box ul li {
   padding: 15px;
-  border-bottom: 1px solid #ddd; 
-  text-align: center;
+  border-bottom: 1px solid #ddd;
+  text-align: center; 
 }
 
+.booking-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 13px;
+}
 
-/* X-knapp uten bakgrunnsfarge */
+.icon-container {
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-left: 10px;
+}
+
+.icon-container:hover {
+  opacity: 0.7;
+  transform: scale(1.1);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
 .close-button {
   position: absolute;
   top: 8px;
   right: 8px;
   font-size: 18px;
-  color: #333; 
+  color: #333;
   background: none;
   cursor: pointer;
   padding: 5px;
@@ -149,7 +165,6 @@
   align-items: center;
   justify-content: center;
 }
-
 
 .close-button:hover {
   color: #ff6f00;
@@ -169,11 +184,8 @@
 }
 
 
+/* BookingFilters.jsx */
 
-
-/* FILTRERING */
-
-/* filtreringsboks */
 .filters-container {
   max-width: 500px;
   padding: 15px;
@@ -182,11 +194,10 @@
   background: #fff;
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  margin: 0 auto; 
+  align-items: center;
+  margin: 0 auto;
 }
 
-/* filtreringsboks: label og input */
 .filters-container label {
   display: flex;
   flex-direction: column;
@@ -196,7 +207,6 @@
   margin-bottom: 8px;
 }
 
-/* filtreringsboks: inputfelt  */
 .filters-container input,
 .filters-container select {
   padding: 6px;
@@ -208,14 +218,12 @@
   transition: border 0.3s ease;
 }
 
-/* hover-effekt på input/select */
 .filters-container input:focus,
 .filters-container select:focus {
   border-color: #ff6f00;
   outline: none;
 }
 
-/* filtreringsboks: knapper */
 .filter-buttons {
   display: flex;
   justify-content: space-evenly;
@@ -235,13 +243,11 @@
   transition: all 0.3s ease;
 }
 
-/* hover-effekt */
 .filter-buttons button:hover {
   background: #e65c00;
   transform: scale(1.03);
 }
 
-/* nullstill-knappen */
 .filter-buttons button:nth-child(2) {
   background: #ddd;
   color: #333;
@@ -253,9 +259,8 @@
 
 
 
-/* BOOKING-KALENDER */
+/* BookingCalendar.jsx */
 
-/* booking calendar: styling av selve tabellen */
 .booking-calendar table {
   width: 100%;
   border-collapse: collapse;
@@ -266,7 +271,7 @@
   padding-top: 20px;
 }
 
-/* booking calender og container */
+
 .calendar-container {
   flex: 2;
   display: flex;
@@ -289,7 +294,6 @@
   margin-top: 20px;
 }
 
-/* overskrifter */
 .booking-calendar th {
   background-color: #070f17;
   color: white;
@@ -298,7 +302,6 @@
   padding: 12px;
 }
 
-/* styling rader */
 .booking-calendar th,
 .booking-calendar td {
   padding: 13px;
@@ -306,7 +309,6 @@
   text-align: center;
 }
 
-/* knappene er eneste som får farge */
 .booking-button {
   width: 100%;
   padding: 10px;
@@ -319,7 +321,6 @@
   transition: background-color 0.3s;
 }
 
-/* grønn knapp for ledige tider */
 .booking-button.available {
   background-color: #1b4d1d;
 }
@@ -328,7 +329,6 @@
   background-color: #145117;
 }
 
-/* rød knapp for opptatte tider */
 .booking-button.booked {
   background-color: #872825;
   cursor: not-allowed;
@@ -338,7 +338,6 @@
   background-color: #872825;
 }
 
-/* ukesnavigasjon */
 .week-nav {
   display: flex;
   justify-content: center;
@@ -364,48 +363,23 @@
 .week-nav button {
   padding: 10px 12px;
 }
- 
-/* se mer-> under calender - knapp */
+
 .see-more-button {
-    background: #ff6f00;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    display: block;
-    margin: 15px auto;
-  }
-  
-  .see-more-button:hover {
-    background: #e65c00;
-    transform: scale(1.05);
-  }
-  
-
-
-/* BRUKERES BOOKINGOVERSIKT/LISTE */
-
-/* sletteikon på users booking list */
-.booking-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 13px;
-}
-
-.icon-container {
+  background: #ff6f00;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1.2rem;
-  margin-left: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  margin: 15px auto;
 }
 
-.icon-container:hover {
-  opacity: 0.7;
-  transform: scale(1.1);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+.see-more-button:hover {
+  background: #e65c00;
+  transform: scale(1.05);
 }
 
 

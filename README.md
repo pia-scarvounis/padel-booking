@@ -92,26 +92,32 @@ Under selve kalenderen er det også en "Se mer" knapp. Dersom brukeren ønsker �
 
 
  # AdminDashboard.jsx:
-Dette er siden hvor innloggede administratorer får en fullstendig oversikt over alle bookinger som brukere har bestilt via sine brukersider. Admin kan redigere eller slette disse bookingene, samt filtrere bookinger ved å bruke "Filtrer siste bookinger"-knappen i midten av headeren. De har også muligheten til å legge inn nye bookinger ved å trykke på "Opprett ny booking"-knappen til venstre i headeren.
 
-Siden består av fem hovedkomponenter:
-
-* CreateBookingPopup.jsx
+ Siden består av fire hovedkomponenter:
 * DeleteBookingPopup.jsx
 * EditBookingPopup.jsx
-* BookingCalendar.jsx (gjenbrukt)
 * BookingFilters.jsx (gjenbrukt)
+* CreateBookingPopup.jsx
 
-Når admin ønsker å legge til en ny booking, kan de trykke på "Opprett ny booking", som aktiverer CreateBookingPopup.jsx. Dette åpner en popup der BookingCalendar.jsx vises, slik at admin kan velge en bane og tidspunkt. Etter å ha valgt tid, må admin fylle inn navn, e-post og medspillere (dersom det er en 4-spillers bane, må navnene separeres med komma). Hvis admin ombestemmer seg, kan de trykke "Avbryt", som lukker popupen og viser oversikten over de siste bookingene igjen.
+
+* AdminDashboard.jsx, DeleteBookingPopup.jsx,  EditBookingPopup.jsx, BookingFilters.jsx (gjenbrukt):
+
+Dette er siden hvor innloggede administratorer får en fullstendig oversikt over alle bookinger som brukere har bestilt via sine brukersider. 
+Admin kan redigere eller slette disse bookingene, samt filtrere bookinger ved å bruke "Filtrer siste bookinger"-knappen i midten av headeren. De har også muligheten til å legge inn nye bookinger ved å trykke på "Opprett ny booking"-knappen til venstre i headeren.
 
 For å slette en booking brukes DeleteBookingPopup.jsx, som åpnes når admin trykker på en "Slett"-knapp ved en booking. Denne popupen viser en bekreftelsesmelding for å unngå at bookinger slettes ved et uhell. Dersom admin bekrefter slettingen, fjernes bookingen permanent fra systemet og BookingList.jsx på siden til den brukeren det gjelder.
 
-Redigering av eksisterende bookinger gjøres gjennom EditBookingPopup.jsx. Når admin trykker på "Rediger"-knappen ved en booking, åpnes en popup der de kan endre dato, tid, banetype og medspillere. Etter at endringene er gjort, kan de bekrefte ved å trykke "Lagre endringer", eller avbryte ved å trykke "Avbryt".
+Redigering av eksisterende bookinger gjøres gjennom EditBookingPopup.jsx. Når admin trykker på "Rediger"-knappen ved en booking i listen, åpnes en popup der de kan endre dato, tid, banetype og medspillere. Etter at endringene er gjort, kan de bekrefte ved å trykke "Lagre endringer", eller avbryte ved å trykke "Avbryt".
 
-For å gjøre det enklere å navigere i bookingene, kan admin bruke BookingFilters.jsx, som gir muligheten til å filtrere "siste bookinger" basert på dato, tidspunkt og banetype. Dette hjelper admin med å finne spesifikke bookinger raskt og effektivt. Hvis admin ønsker å tilbakestille filtrene, kan de trykke på "Nullstill filter" for å se alle siste bestilte bookinger igjen.
+For å gjøre det enklere å navigere i de bestilte bookingene, kan admin bruke BookingFilters.jsx, som gir muligheten til å filtrere "siste bookinger" basert på dato, tidspunkt og/eller banetype. Dette hjelper admin med å finne spesifikke bookinger raskt og effektivt. Hvis admin ønsker å tilbakestille filtrene, kan de trykke på "Nullstill filter" for å se alle siste bestilte bookinger igjen. 
 
-Til sammen gir disse komponentene en strukturert og brukervennlig måte for administratorer å håndtere bookinger på, enten det gjelder oppretting, redigering, sletting eller filtrering.
- 
+
+* CreateBookingPopup.jsx:
+Når admin ønsker å legge til en ny booking, kan de trykke på "Opprett ny booking"-knappen i header, som aktiverer CreateBookingPopup.jsx. Dette åpner en popup der en tabelloversikt over både ledige og opptatte baner vises. Etter å ha reservert, må admin fylle inn navn, e-post og medspillere (dersom det er en 4-spillers bane, må navnene separeres med komma). Hvis admin ombestemmer seg, kan de trykke "Avbryt", som lukker popupen og viser oversikten over de siste bookingene igjen.
+
+(Her skulle jeg lagt inn filtrering dersom jeg hadde hatt mer tid)
+
+
  Styling av AdminDashboard.jsx er gjort i AdminDashboard.css.
 
 
