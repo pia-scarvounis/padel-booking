@@ -90,7 +90,7 @@ function AdminDashboard() {
         <h1 className="admin-title">Velkommen til Admin Dashboard</h1>
         <div className="admin-subtitle">
           <p>
-            Her kan ansatte opprette bookinger og se oversikt over alle bookinger.{" "}
+            Her kan ansatte opprette nye bookinger og se oversikt over alle bookinger.{" "}
           </p>
           <div className="btncontainer-header">
             <button
@@ -102,7 +102,7 @@ function AdminDashboard() {
               className="filter-button"
               onClick={() => setShowFilterPopup(true)}
             >
-              Filtrer bookinger
+              Filtrer "Siste bookinger"
             </button>
 
             <button className="logout-button" onClick={() => navigate("/")}>
