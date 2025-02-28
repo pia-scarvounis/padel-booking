@@ -7,23 +7,25 @@ Spillere skal enkelt kunne registrere seg og logge inn på "min side", der de ka
 
 Admin skal ha tilgang til et eget Admin-dashboard, der de kan opprette, endre og slette bookinger.
 
-Padelhallens åpningstider: kl 08.00 - 22.00 hver dag. 
-Dersom en spiller booker en bane varer paddel-timen deres i 1 time.
+* Åpningstider: kl 08.00 - 22.00 hver dag. 
+* 1 booking = varer i 1 time.
+
 Brukere og Admin kan se bookinger 100 dager frem i tid. 
 
 I padel-hallen finnes det fire ulike baner som brukere kan velge mellom:
-Bane 1: singelbane - 2 spillere
-Bane 2: singelbane - 2 spillere
-Bane 3: dobbeltbane - 4 spillere 
-Bane 4: dobbeltbane - 4 spillere 
+
+* Bane 1: singelbane - 2 spillere
+* Bane 2: singelbane - 2 spillere
+* Bane 3: dobbeltbane - 4 spillere 
+* Bane 4: dobbeltbane - 4 spillere 
 
 Prosjektet er satt opp med React og Vite for en rask og effektiv utviklingsprosess. Prosjektet er versjonskontrollert GitHub, hvor jeg har opprettet et privat repository og klonet det til Mac-en min for å jobbe lokalt
 
 
-# Funksjonalitet:
+# Viktigste sider og komponenter
  /pages: 
 
-- Home.jsx
+- Home.jsx 
 - Booking.jsx
 - AdminDashboard.jsx
 
@@ -97,25 +99,25 @@ Under selve kalenderen er det også en "Se mer" knapp. Dersom brukeren ønsker �
 * DeleteBookingPopup.jsx
 * EditBookingPopup.jsx
 * BookingFilters.jsx (gjenbrukt)
-* CreateBookingPopup.jsx
+* CreateBookingPopup.jsx 
 
 
-* AdminDashboard.jsx, DeleteBookingPopup.jsx,  EditBookingPopup.jsx, BookingFilters.jsx (gjenbrukt):
-
-Dette er siden hvor innloggede administratorer får en fullstendig oversikt over alle bookinger som brukere har bestilt via sine brukersider. 
+* AdminDashboard.jsx: 
+ Dette er siden hvor innloggede administratorer får en fullstendig oversikt over alle bookinger som brukere har bestilt via sine brukersider. 
 Admin kan redigere eller slette disse bookingene, samt filtrere bookinger ved å bruke "Filtrer siste bookinger"-knappen i midten av headeren. De har også muligheten til å legge inn nye bookinger ved å trykke på "Opprett ny booking"-knappen til venstre i headeren.
 
-For å slette en booking brukes DeleteBookingPopup.jsx, som åpnes når admin trykker på en "Slett"-knapp ved en booking. Denne popupen viser en bekreftelsesmelding for å unngå at bookinger slettes ved et uhell. Dersom admin bekrefter slettingen, fjernes bookingen permanent fra systemet og BookingList.jsx på siden til den brukeren det gjelder.
+* DeleteBookingPopup.jsx:
+For å slette en av de "siste bestilte" bookingene brukes DeleteBookingPopup.jsx, som åpnes når admin trykker på en "Slett"-knapp ved en booking. Denne popupen viser en bekreftelsesmelding for å unngå at bookinger slettes ved et uhell. Dersom admin bekrefter slettingen, fjernes bookingen permanent fra systemet og på siden til den brukeren det gjelder.
 
-Redigering av eksisterende bookinger gjøres gjennom EditBookingPopup.jsx. Når admin trykker på "Rediger"-knappen ved en booking i listen, åpnes en popup der de kan endre dato, tid, banetype og medspillere. Etter at endringene er gjort, kan de bekrefte ved å trykke "Lagre endringer", eller avbryte ved å trykke "Avbryt".
+* EditBookingPopup.jsx:
+Redigering av eksisterende bookinger gjøres gjennom EditBookingPopup.jsx. Når admin trykker på "Rediger"-knappen ved en booking i listen, åpnes en popup der de kan endre dato, tid, banetype og medspillere. Etter at endringene er gjort, kan de bekrefte ved å trykke "Lagre endringer", eller avbryte ved å trykke "Avbryt". Disse endringene lagres også på brukers side. 
 
-For å gjøre det enklere å navigere i de bestilte bookingene, kan admin bruke BookingFilters.jsx, som gir muligheten til å filtrere "siste bookinger" basert på dato, tidspunkt og/eller banetype. Dette hjelper admin med å finne spesifikke bookinger raskt og effektivt. Hvis admin ønsker å tilbakestille filtrene, kan de trykke på "Nullstill filter" for å se alle siste bestilte bookinger igjen. 
+* BookingFilters.jsx: (gjenbrukt): For å gjøre det enklere å navigere i de bestilte bookingene, kan admin bruke BookingFilters.jsx, som gir muligheten til å filtrere "siste bookinger" basert på dato, tidspunkt og/eller banetype. Dette hjelper admin med å finne spesifikke bookinger raskt og effektivt. Hvis admin ønsker å tilbakestille filtrene, kan de trykke på "Nullstill filter" for å se alle siste bestilte bookinger igjen. 
 
 
 * CreateBookingPopup.jsx:
-Når admin ønsker å legge til en ny booking, kan de trykke på "Opprett ny booking"-knappen i header, som aktiverer CreateBookingPopup.jsx. Dette åpner en popup der en tabelloversikt over både ledige og opptatte baner vises. Etter å ha reservert, må admin fylle inn navn, e-post og medspillere (dersom det er en 4-spillers bane, må navnene separeres med komma). Hvis admin ombestemmer seg, kan de trykke "Avbryt", som lukker popupen og viser oversikten over de siste bookingene igjen.
-
-(Her skulle jeg lagt inn filtrering dersom jeg hadde hatt mer tid)
+Når admin ønsker å legge til en ny booking, kan de trykke på "Opprett ny booking"-knappen til venstre i header, som aktiverer CreateBookingPopup.jsx. Dette åpner en popup der en tabelloversikt over både ledige og opptatte baner vises. Etter å ha reservert, må admin fylle inn navn, e-post og medspillere (dersom det er en 4-spillers bane, må navnene separeres med komma). Hvis admin ombestemmer seg, kan de trykke "Avbryt", som lukker popupen og viser oversikten over de siste bookingene igjen.
+(Her skulle jeg gjerne gjenbrukt filtrering dersom jeg hadde hatt mer tid/gjort hele komponenten mer brukervennlig)
 
 
  Styling av AdminDashboard.jsx er gjort i AdminDashboard.css.
