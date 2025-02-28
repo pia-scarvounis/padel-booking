@@ -95,16 +95,11 @@ Under selve kalenderen er det også en "Se mer" knapp. Dersom brukeren ønsker �
 
  # AdminDashboard.jsx:
 
- Siden består av fire hovedkomponenter:
-* DeleteBookingPopup.jsx
-* EditBookingPopup.jsx
-* BookingFilters.jsx (gjenbrukt)
-* CreateBookingPopup.jsx 
-
-
 * AdminDashboard.jsx: 
  Dette er siden hvor innloggede administratorer får en fullstendig oversikt over alle bookinger som brukere har bestilt via sine brukersider. 
-Admin kan redigere eller slette disse bookingene, samt filtrere bookinger ved å bruke "Filtrer siste bookinger"-knappen i midten av headeren. De har også muligheten til å legge inn nye bookinger ved å trykke på "Opprett ny booking"-knappen til venstre i headeren.
+Admin kan redigere eller slette disse bookingene, samt filtrere bookinger ved å bruke "Filtrer siste bookinger"-knappen i midten av headeren. De har også muligheten til å legge inn nye bookinger ved å trykke på "Opprett ny booking"-knappen til venstre i headeren. (Skulle laget "siste-bookinger"/bookingoversikt som egen komponent hadde jeg gjort det igjen) 
+
+ Siden består av fire hovedkomponenter:
 
 * DeleteBookingPopup.jsx:
 For å slette en av de "siste bestilte" bookingene brukes DeleteBookingPopup.jsx, som åpnes når admin trykker på en "Slett"-knapp ved en booking. Denne popupen viser en bekreftelsesmelding for å unngå at bookinger slettes ved et uhell. Dersom admin bekrefter slettingen, fjernes bookingen permanent fra systemet og på siden til den brukeren det gjelder.
